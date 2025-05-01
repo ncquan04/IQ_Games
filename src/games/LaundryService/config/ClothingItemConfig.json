@@ -1,0 +1,38 @@
+{
+  "animation": {
+    "position_y": {
+      "very-top": -290,
+      "top": -160,
+      "middle": -30,
+      "bottom": 110,
+      "pending": -420
+    },
+    "scales": {
+      "very-top": 0.8,
+      "top": 0.9,
+      "middle": 1,
+      "bottom": 1.1,
+      "pending": 0.5
+    },
+    "opacities": {
+      "very-top": 0.4,
+      "top": 0.6,
+      "middle": 0.8,
+      "bottom": 1,
+      "pending": 0
+    },
+    "timing": {
+      "fly_to_basket": 125,
+      "fade_out": 30,
+      "shift_down": 60,
+      "shake_wrong": 20
+    },
+    "position_sequence": {
+      "very-top": "top",
+      "top": "middle",
+      "middle": "bottom",
+      "pending": "very-top",
+      "bottom": null
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "levels": {
+    "1": {
+      "pointsPerCorrect": 13,
+      "pointsPerIncorrect": -10,
+      "targetScore": 1000,
+      "timeLimit": 45
+    },
+    "2": {
+      "pointsPerCorrect": 15,
+      "pointsPerIncorrect": -12,
+      "targetScore": 1500,
+      "timeLimit": 45
+    },
+    "3": {
+      "pointsPerCorrect": 18,
+      "pointsPerIncorrect": -13,
+      "targetScore": 2000,
+      "timeLimit": 45
+    },
+    "4": {
+      "pointsPerCorrect": 18,
+      "pointsPerIncorrect": -14,
+      "targetScore": 2500,
+      "timeLimit": 50
+    },
+    "5": {
+      "pointsPerCorrect": 21,
+      "pointsPerIncorrect": -16,
+      "targetScore": 3000,
+      "timeLimit": 50
+    },
+    "6": {
+      "pointsPerCorrect": 25,
+      "pointsPerIncorrect": -21,
+      "targetScore": 3500,
+      "timeLimit": 50
+    }
+  }
+}

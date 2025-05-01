@@ -1,0 +1,64 @@
+{
+  "levels": [
+    {
+      "pointsForCorrect": 24,
+      "pointsForIncorrect": -19,
+      "targetScore": 1000,
+      "timeLimit": 50
+    },
+    {
+      "pointsForCorrect": 27,
+      "pointsForIncorrect": -22,
+      "targetScore": 1500,
+      "timeLimit": 50
+    },
+    {
+      "pointsForCorrect": 30,
+      "pointsForIncorrect": -24,
+      "targetScore": 2000,
+      "timeLimit": 50
+    },
+    {
+      "pointsForCorrect": 33,
+      "pointsForIncorrect": -26,
+      "targetScore": 2500,
+      "timeLimit": 55
+    },
+    {
+      "pointsForCorrect": 34,
+      "pointsForIncorrect": -27,
+      "targetScore": 3000,
+      "timeLimit": 55
+    },
+    {
+      "pointsForCorrect": 35,
+      "pointsForIncorrect": -28,
+      "targetScore": 3500,
+      "timeLimit": 55
+    },
+    {
+      "pointsForCorrect": 36,
+      "pointsForIncorrect": -29,
+      "targetScore": 4000,
+      "timeLimit": 60
+    },
+    {
+      "pointsForCorrect": 39,
+      "pointsForIncorrect": -31,
+      "targetScore": 4500,
+      "timeLimit": 60
+    },
+    {
+      "pointsForCorrect": 42,
+      "pointsForIncorrect": -34,
+      "targetScore": 5000,
+      "timeLimit": 60
+    },
+    {
+      "pointsForCorrect": 45,
+      "pointsForIncorrect": -36,
+      "targetScore": 5500,
+      "timeLimit": 65
+    }
+  ]
+}

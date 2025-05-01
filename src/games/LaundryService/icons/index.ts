@@ -1,0 +1,12 @@
+export { default as BabyKitIcon } from './BabyKitIcon';
+export { default as BasketIcon } from './BasketIcon';
+export { default as DressIcon } from './DressIcon';
+export { default as HatIcon } from './HatIcon';
+export { default as JacketIcon } from './JacketIcon';
+export { default as LongDressIcon } from './LongDressIcon';
+export { default as ShirtIcon } from './ShirtIcon';
+export { default as ShortDressIcon } from './ShortDressIcon';
+export { default as ShortIcon } from './ShortIcon';
+export { default as SocksIcon } from './SocksIcon';
+export { default as SuitIcon } from './SuitIcon';
+export { default as TankTopIcon } from './TankTopIcon';

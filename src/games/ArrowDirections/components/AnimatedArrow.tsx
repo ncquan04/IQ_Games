@@ -41,6 +41,9 @@ export const ARROW_POSITIONS = {
     [ArrowPosition.TOP]: { y: -240, scale: 0.5, opacity: 0.3 },
 };
 
+// Vị trí bên ngoài màn hình cho hiệu ứng mũi tên mới
+const OFF_SCREEN_POSITION = { y: -360, scale: 0.3, opacity: 0 };
+
 // Thời gian cho hiệu ứng
 export const ARROW_SLIDE_DURATION_MS = 100; // Thời gian cho hiệu ứng di chuyển mũi tên
 export const COLOR_FEEDBACK_DURATION_MS = 100; // Thời gian cho hiệu ứng phản hồi màu sắc
@@ -74,6 +77,19 @@ const AnimatedArrow = ({
     const scale = useSharedValue(ARROW_POSITIONS[position].scale);
     const translateY = useSharedValue(ARROW_POSITIONS[position].y);
     const rotation = useSharedValue(0);
+    
+    // Mũi tên mới thêm vào trên cùng sẽ có vị trí bắt đầu từ ngoài màn hình
+    const isNewTopArrow = position === ArrowPosition.TOP && animationTrigger > 0;
+
+    // Khởi tạo giá trị ban đầu cho mũi tên mới
+    // Khi mũi tên mới được thêm vào trên cùng, nó sẽ bắt đầu từ vị trí cao hơn
+    useEffect(() => {
+        if (isNewTopArrow) {
+            opacity.value = OFF_SCREEN_POSITION.opacity;
+            scale.value = OFF_SCREEN_POSITION.scale;
+            translateY.value = OFF_SCREEN_POSITION.y;
+        }
+    }, [direction, type]); // Chỉ chạy khi arrow mới được tạo (direction/type thay đổi)
 
     // Kiểm tra xem có nên ẩn mũi tên hay không dựa vào điểm số và vị trí
     const shouldHideArrow = (

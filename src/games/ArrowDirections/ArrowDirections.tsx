@@ -12,10 +12,10 @@ import Animated, {
     Easing,
 } from 'react-native-reanimated';
 import { Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-gesture-handler';
-import GameOverModal from './GameOverModal';
-import TimerDisplay from './TimerDisplay';
+import GameOverModal from './components/GameOverModal';
+import TimerDisplay from './components/TimerDisplay';
 // Import các component đã tách
-import ParallaxBackground from './ParallaxBackground';
+import ParallaxBackground from './components/ParallaxBackground';
 import AnimatedArrow, { 
     Direction, 
     ArrowType, 
@@ -23,13 +23,23 @@ import AnimatedArrow, {
     ARROW_POSITIONS,
     ARROW_SLIDE_DURATION_MS,
     COLOR_FEEDBACK_DURATION_MS
-} from './AnimatedArrow';
+} from './components/AnimatedArrow';
+
+// Import cấu hình levels
+import gameLevels from './config/levels.json';
+
+// Định nghĩa interface cho Level
+interface Level {
+    pointsForCorrect: number;
+    pointsForIncorrect: number;
+    targetScore: number;
+    timeLimit: number; // Thêm timeLimit vào interface Level
+}
 
 // Lấy kích thước màn hình
 const { width, height } = Dimensions.get('window');
 
 // Các hằng số cho trò chơi
-const GAME_DURATION_MS = 60000; // 1 phút mỗi cấp độ
 const INITIAL_SPAWN_DELAY_MS = 0; // Độ trễ ban đầu để sinh ra mũi tên
 const MIN_SPAWN_DELAY_MS = 0; // Độ trễ tối thiểu để sinh ra mũi tên
 const SPAWN_DECREASE_RATE = 25; // Tốc độ giảm độ trễ sinh ra mũi tên
@@ -54,9 +64,12 @@ const generateRandomArrow = () => {
  * Người chơi phải vuốt theo hướng mũi tên trắng hoặc ngược hướng mũi tên vàng
  */
 const ArrowDirections = () => {
+    console.log('ArrowDirections component rerendered');
+
     // States cơ bản của trò chơi
     const [isPlaying, setIsPlaying] = useState(false);
     const [score, setScore] = useState(0);
+    const [currentLevel, setCurrentLevel] = useState<number>(0); // State quản lý level hiện tại
     const highScoreRef = useRef<number>(0);
     const [isGameOver, setIsGameOver] = useState(false);
     const [showModal, setShowModal] = useState(false);
@@ -67,9 +80,12 @@ const ArrowDirections = () => {
     
     // Chuyển các state không trực tiếp ảnh hưởng UI thành ref
     const spawnDelayMsRef = useRef<number>(INITIAL_SPAWN_DELAY_MS);
-    const gameTimeMsRef = useRef<number>(GAME_DURATION_MS);
+    const gameTimeMsRef = useRef<number>(0); // Khởi tạo với 0, sẽ được cập nhật trong startGame
     const animationTriggerRef = useRef<number>(0);
     const isTransitioningRef = useRef<boolean>(false);
+
+    // Thêm ref để theo dõi thời gian còn lại cho progress bar
+    const currentTimeRemainingRef = useRef<number>(0); // Khởi tạo với 0, sẽ được cập nhật trong startGame
 
     // Mảng stack các mũi tên
     const [arrowStack, setArrowStack] = useState<{
@@ -87,53 +103,50 @@ const ArrowDirections = () => {
     const timeBarWidth = useSharedValue(width);
     const scoreAnimation = useSharedValue(0);
     const borderFlash = useSharedValue(0);
+    
+    // Lấy thông tin level hiện tại
+    const getCurrentLevelConfig = useCallback((): Level => {
+        return gameLevels.levels[currentLevel] || gameLevels.levels[0];
+    }, [currentLevel]);
+    
+    /**
+     * Sinh mũi tên tiếp theo và dịch chuyển stack
+     * Được gọi sau khi có hành động vuốt
+     */
+    const spawnNextArrow = useCallback(() => {
+        setArrowStack(prevStack => {
+            // Loại bỏ mũi tên dưới cùng (index 0)
+            const updatedStack = prevStack.slice(1);
+            
+            // Thêm một mũi tên mới vào trên cùng
+            return [
+                ...updatedStack,
+                { ...generateRandomArrow(), isCorrect: null }
+            ];
+        });
 
-    // Khởi tạo giá trị ban đầu cho Reanimated shared values
-    useEffect(() => {
-        // Khởi tạo giá trị ngay khi component mount
-        timeBarWidth.value = width;
-        scoreAnimation.value = 0;
-        borderFlash.value = 0;
+        // Kích hoạt animations
+        animationTriggerRef.current += 1;
     }, []);
 
     /**
-     * Bắt đầu trò chơi
-     * Khởi tạo lại tất cả các giá trị và thiết lập timer
+     * Làm nháy viền khi vuốt sai
+     * Tạo hiệu ứng phản hồi trực quan
      */
-    const startGame = useCallback(() => {
-        setIsPlaying(true);
-        setIsGameOver(false);
-        setShowModal(false);
-        setScore(0);
-        spawnDelayMsRef.current = INITIAL_SPAWN_DELAY_MS;
-        gameTimeMsRef.current = GAME_DURATION_MS;
-        
-        // Tăng gameId để báo hiệu một trò chơi mới
-        setGameId(prevId => prevId + 1);
+    const flashBorder = useCallback(() => {
+        borderFlash.value = withSequence(
+            withTiming(1, { duration: 100 }),
+            withTiming(0, { duration: 100 })
+        );
+    }, [borderFlash]);
 
-        // Khởi tạo với năm mũi tên
-        const initialArrows = [
-            { ...generateRandomArrow(), isCorrect: null }, // bottom
-            { ...generateRandomArrow(), isCorrect: null }, // lower
-            { ...generateRandomArrow(), isCorrect: null }, // middle/current
-            { ...generateRandomArrow(), isCorrect: null }, // upper
-            { ...generateRandomArrow(), isCorrect: null }, // top
-        ];
-        setArrowStack(initialArrows);
-
-        // Đặt giá trị cho thanh thời gian
-        timeBarWidth.value = width;
-        // Sử dụng setTimeout để tránh warning
-        setTimeout(() => {
-            timeBarWidth.value = withTiming(0, {
-                duration: GAME_DURATION_MS,
-                easing: Easing.linear
-            }, (finished) => {
-                if (finished) {
-                    runOnJS(endGameSafe)();
-                }
-            });
-        }, 0);
+    /**
+     * Xử lý khi mũi tên hoàn thành animation
+     * Chỉ được gọi khi mũi tên dưới cùng hoàn thành animation thoát
+     */
+    const handleArrowComplete = useCallback(() => {
+        // Ghi chú: Hiện tại hàm này chỉ được gọi khi mũi tên trước đó (dưới cùng)
+        // hoàn thành animation thoát sau khi đạt vị trí dưới cùng
     }, []);
 
     /**
@@ -167,33 +180,73 @@ const ArrowDirections = () => {
     }, [isPlaying, score]);
 
     /**
-     * Xử lý khi mũi tên hoàn thành animation
-     * Chỉ được gọi khi mũi tên dưới cùng hoàn thành animation thoát
+     * Bắt đầu trò chơi
+     * Khởi tạo lại tất cả các giá trị và thiết lập timer
      */
-    const handleArrowComplete = useCallback(() => {
-        // Ghi chú: Hiện tại hàm này chỉ được gọi khi mũi tên trước đó (dưới cùng)
-        // hoàn thành animation thoát sau khi đạt vị trí dưới cùng
-    }, []);
+    const startGame = useCallback(() => {
+        setIsPlaying(true);
+        setIsGameOver(false);
+        setShowModal(false);
+        setScore(0);
+        spawnDelayMsRef.current = INITIAL_SPAWN_DELAY_MS;
+        
+        // Lấy thời gian từ cấu hình level hiện tại (đổi từ giây sang milliseconds)
+        const levelConfig = getCurrentLevelConfig();
+        gameTimeMsRef.current = levelConfig.timeLimit * 1000;
+
+        // Tăng gameId để báo hiệu một trò chơi mới
+        setGameId(prevId => prevId + 1);
+
+        // Khởi tạo với năm mũi tên
+        const initialArrows = [
+            { ...generateRandomArrow(), isCorrect: null }, // bottom
+            { ...generateRandomArrow(), isCorrect: null }, // lower
+            { ...generateRandomArrow(), isCorrect: null }, // middle/current
+            { ...generateRandomArrow(), isCorrect: null }, // upper
+            { ...generateRandomArrow(), isCorrect: null }, // top
+        ];
+        setArrowStack(initialArrows);
+
+        // Đặt giá trị ban đầu cho thanh thời gian
+        timeBarWidth.value = width;
+    }, [getCurrentLevelConfig]);
 
     /**
-     * Sinh mũi tên tiếp theo và dịch chuyển stack
-     * Được gọi sau khi có hành động vuốt
+     * Xử lý khi người chơi muốn chơi level tiếp theo
      */
-    const spawnNextArrow = useCallback(() => {
-        setArrowStack(prevStack => {
-            // Loại bỏ mũi tên dưới cùng (index 0)
-            const updatedStack = prevStack.slice(1);
-            
-            // Thêm một mũi tên mới vào trên cùng
-            return [
-                ...updatedStack,
-                { ...generateRandomArrow(), isCorrect: null }
-            ];
-        });
+    const handleNextLevel = useCallback(() => {
+        // Chỉ cho phép tiến lên level tiếp theo nếu chưa đạt max level
+        if (currentLevel < gameLevels.levels.length - 1) {
+            setCurrentLevel(currentLevel + 1);
+            startGame();
+        }
+    }, [currentLevel, startGame]);
 
-        // Kích hoạt animations
-        animationTriggerRef.current += 1;
-    }, []);
+    /**
+     * Xử lý nút Play Again
+     * Đóng modal và khởi động lại trò chơi ở level hiện tại
+     */
+    const handleRestartGame = useCallback(() => {
+        // Đóng modal
+        setShowModal(false);
+        
+        // Đặt lại tất cả các trạng thái quan trọng
+        isTransitioningRef.current = false;
+        
+        // Đảm bảo các timers đã được xóa
+        if (gameTimerRef.current) {
+            clearInterval(gameTimerRef.current);
+            gameTimerRef.current = null;
+        }
+
+        if (spawnTimerRef.current) {
+            clearTimeout(spawnTimerRef.current);
+            spawnTimerRef.current = null;
+        }
+
+        // Khởi động lại trò chơi sau một khoảng thời gian ngắn
+        setTimeout(startGame, 300);
+    }, [startGame]);
 
     /**
      * Kiểm tra xem vuốt có đúng không
@@ -203,6 +256,9 @@ const ArrowDirections = () => {
     const checkSwipe = useCallback((swipeDirection: Direction) => {
         // Nếu có ít hơn 5 mũi tên, hoặc trò chơi kết thúc, hoặc animation đang diễn ra, bỏ qua
         if (arrowStack.length < 5 || !isPlaying || isTransitioningRef.current) return;
+
+        // Lấy config của level hiện tại để tính điểm
+        const levelConfig = getCurrentLevelConfig();
 
         // Đánh dấu rằng quá trình chuyển đang diễn ra
         isTransitioningRef.current = true;
@@ -240,9 +296,9 @@ const ArrowDirections = () => {
         });
 
         if (correct) {
-            // Tăng điểm với animation
+            // Tăng điểm với animation và sử dụng pointsForCorrect từ level hiện tại
             setScore(prev => {
-                const newScore = prev + 1;
+                const newScore = prev + levelConfig.pointsForCorrect;
                 scoreAnimation.value = withSequence(
                     withTiming(1, { duration: 150 }),
                     withTiming(0, { duration: 150 })
@@ -250,8 +306,11 @@ const ArrowDirections = () => {
                 return newScore;
             });
         } else {
-            // Vuốt sai - làm nháy viền nhưng tiếp tục chơi
+            // Vuốt sai - làm nháy viền và trừ điểm theo cấu hình level
             flashBorder();
+            setScore(prev => {
+                return Math.max(0, prev + levelConfig.pointsForIncorrect); // Đảm bảo điểm không xuống dưới 0
+            });
         }
 
         // Cho cả vuốt đúng và sai, sinh mũi tên tiếp theo sau độ trễ
@@ -268,17 +327,26 @@ const ArrowDirections = () => {
                 spawnDelayMsRef.current = Math.max(MIN_SPAWN_DELAY_MS, spawnDelayMsRef.current - SPAWN_DECREASE_RATE);
             }
         }, spawnDelayMsRef.current);
-    }, [arrowStack, isPlaying, score, spawnNextArrow]);
+        
+    }, [arrowStack, isPlaying, score, getCurrentLevelConfig]);
 
-    /**
-     * Làm nháy viền khi vuốt sai
-     * Tạo hiệu ứng phản hồi trực quan
-     */
-    const flashBorder = useCallback(() => {
-        borderFlash.value = withSequence(
-            withTiming(1, { duration: 100 }),
-            withTiming(0, { duration: 100 })
-        );
+    // Khởi tạo giá trị ban đầu cho Reanimated shared values
+    useEffect(() => {
+        // Khởi tạo giá trị ngay khi component mount
+        timeBarWidth.value = width;
+        scoreAnimation.value = 0;
+        borderFlash.value = 0;
+    }, []);
+
+    // Hàm xử lý cập nhật thời gian từ TimerDisplay
+    const handleTimeUpdate = useCallback((remainingTime: number) => {
+        // Cập nhật ref để component khác có thể truy cập
+        currentTimeRemainingRef.current = remainingTime;
+        
+        // Cập nhật thanh progress bar dựa trên thời gian còn lại
+        // Sử dụng gameTimeMsRef.current thay vì GAME_DURATION_MS
+        const progressWidth = (remainingTime / gameTimeMsRef.current) * width;
+        timeBarWidth.value = progressWidth;
     }, []);
 
     // Thiết lập gesture handlers - chỉ hoạt động khi trò chơi đang chơi và không trong quá trình chuyển tiếp
@@ -340,19 +408,6 @@ const ArrowDirections = () => {
         };
     }, []);
 
-    /**
-     * Xử lý nút Play Again
-     * Đóng modal và khởi động lại trò chơi
-     */
-    const handleRestartGame = useCallback(() => {
-        // Đóng modal
-        setShowModal(false);
-        // Đặt lại trạng thái isTransitioning về false để mở khóa cử chỉ vuốt
-        isTransitioningRef.current = false;
-        // Khởi động lại trò chơi sau một khoảng thời gian ngắn
-        setTimeout(startGame, 300);
-    }, [startGame]);
-
     return (
         <View style={{ flex: 1 }}>
             <GestureHandlerRootView style={{ flex: 1 }}>
@@ -371,15 +426,16 @@ const ArrowDirections = () => {
                         {/* Hiển thị thời gian - chỉ hiển thị khi đang chơi */}
                         {/* Truyền gameId để kiểm soát việc khởi động lại timer */}
                         {isPlaying && <TimerDisplay 
-                            initialTime={GAME_DURATION_MS} 
+                            initialTime={gameTimeMsRef.current} 
                             onTimeUp={endGameSafe}
                             gameId={gameId}
+                            onTimeUpdate={handleTimeUpdate}
                         />}
 
                         {/* Hiển thị điểm - chỉ hiển thị khi đang chơi */}
                         {isPlaying && (
                             <Animated.Text style={[styles.scoreText, scoreStyle]}>
-                                {score}
+                                Score: {score}
                             </Animated.Text>
                         )}
 
@@ -393,6 +449,7 @@ const ArrowDirections = () => {
                                         Yellow arrow: Swipe in the OPPOSITE direction{'\n\n'}
                                         React to the middle arrow!
                                     </Text>
+                                    <Text style={styles.levelText}>Level: {currentLevel + 1}</Text>
                                     <TouchableOpacity
                                         style={styles.startButton}
                                         onPress={startGame}
@@ -441,7 +498,10 @@ const ArrowDirections = () => {
                 visible={showModal}
                 score={score}
                 highScore={highScoreRef.current}
+                targetScore={getCurrentLevelConfig().targetScore}
+                currentLevel={currentLevel}
                 onRestart={handleRestartGame}
+                onNextLevel={score >= getCurrentLevelConfig().targetScore ? handleNextLevel : undefined}
             />
         </View>
     );
@@ -474,6 +534,11 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold',
         color: 'white',
+    },
+    levelText: {
+        fontSize: 20,
+        color: '#FFC107',
+        marginBottom: 20,
     },
     gameContent: {
         flex: 1,
@@ -517,7 +582,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: '#FFC107',
         fontWeight: 'bold',
-    },
+    }
 });
 
 export default ArrowDirections;
