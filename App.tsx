@@ -28,6 +28,7 @@ import ConnectTheDots from './src/games/ConnectTheDots/ConnectTheDots';
 import TowerOfHanoi from './src/games/TowerOfHanoi/TowerOfHanoi';
 import ArrowDirections from './src/games/ArrowDirections/ArrowDirections';
 import LaundryService from './src/games/LaundryService/LaundryService';
+import PhoneNumbers from './src/games/PhoneNumbers/PhoneNumbers';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -78,7 +79,7 @@ function App(): React.JSX.Element {
   const safePadding = '5%';
 
   return (
-    <LaundryService />
+    <PhoneNumbers />
   );
 }
 

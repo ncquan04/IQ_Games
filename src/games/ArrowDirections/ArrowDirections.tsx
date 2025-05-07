@@ -26,7 +26,7 @@ import AnimatedArrow, {
 } from './components/AnimatedArrow';
 
 // Import cấu hình levels
-import gameLevels from './config/levels.json';
+import gameLevels from './data/levels.json';
 
 // Định nghĩa interface cho Level
 interface Level {

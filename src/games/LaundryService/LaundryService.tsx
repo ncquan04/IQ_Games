@@ -6,8 +6,7 @@ import BasketButton from './components/BasketButton';
 import TimerDisplay from './components/TimerDisplay';
 import GameOverModal from './components/GameOverModal';
 import ParallaxBackground from './components/ParallaxBackground';
-import useGameLogic from './hooks/useGameLogic';
-import { ClothingColor, GameConfig } from './types';
+import { ClothingColor, GameConfig, LevelConfig } from './types';
 import Animated, {
   useSharedValue,
   withSequence,
@@ -15,9 +14,11 @@ import Animated, {
   Easing,
   useAnimatedStyle,
 } from 'react-native-reanimated';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Import game configuration
 import gameConfig from './config/gameConfig.json';
+import { getDefaultLevelConfig } from './config/levelConfigs';
 
 const { width, height } = Dimensions.get('window');
 
@@ -32,6 +33,40 @@ const ANIMATION_TIMING = {
   SHAKE_SCREEN: 10, // Duration for each step in screen shake animation
   BASKET_SWAP: 150,  // Duration for basket swap animation (updated from 600ms to 150ms)
 };
+
+// All available clothing icons
+const iconTypes = [
+  'BabyKit', 'Dress', 'Hat', 'Jacket', 'LongDress', 
+  'Shirt', 'ShortDress', 'Short', 'Socks', 'Suit', 'TankTop'
+];
+
+// Type definitions for clothing items
+export interface ClothingItem {
+  id: string;
+  icon: string;
+  color: ClothingColor;
+  animating?: boolean;
+  isPending?: boolean;
+}
+
+// Game state interface
+interface GameState {
+  items: ClothingItem[];
+  score: number;
+  timer: number;
+  level: number;
+  isGameActive: boolean;
+  isPaused: boolean;
+  animatingItemId: string | null;
+  currentLevelConfig: LevelConfig;
+  levelComplete?: boolean;
+}
+
+// Utility function to create a unique ID
+const generateUniqueId = (): string => `${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
+
+// Storage key for saving the player's level
+const STORAGE_KEY_LEVEL = '@laundry_service_max_level';
 
 // Define the interface for TimerDisplayWrapper props
 interface TimerDisplayWrapperProps {
@@ -92,28 +127,43 @@ const TimerDisplayWrapper = React.memo<TimerDisplayWrapperProps>(({
 const LaundryService = () => {
   console.log('LaundryService component rendered');
 
-  // Use game logic hook
-  const { 
-    state, 
-    startGame, 
-    togglePause, 
-    handleItemSelection, 
-    completeAnimation, 
-    setCurrentLevelConfig,
-    maxUnlockedLevel,  // Get the max unlocked level
-    getCurrentTimer, // Sử dụng hàm mới để lấy thời gian chính xác
-    setLevel  // We'll use this to go to the next level
-  } = useGameLogic();
+  // Initial level config
+  const initialLevel = 1;
+  const initialLevelConfig = getDefaultLevelConfig(initialLevel);
 
+  // Track the max level the player has unlocked
+  const [maxUnlockedLevel, setMaxUnlockedLevel] = useState(initialLevel);
+  
+  // Game state
+  const [state, setState] = useState<GameState>({
+    items: [],
+    score: 0,
+    timer: initialLevelConfig.timeLimit || 45,
+    level: initialLevel,
+    isGameActive: false,
+    isPaused: false,
+    animatingItemId: null,
+    currentLevelConfig: initialLevelConfig,
+  });
+
+  // Timer reference to avoid unnecessary re-renders
+  const timerRef = useRef(initialLevelConfig.timeLimit || 45);
+  
+  // Level config reference
+  const levelConfigRef = useRef<LevelConfig>(initialLevelConfig);
+  
   // Keep modal visibility as state since it directly affects rendering
   const [gameOverVisible, setGameOverVisible] = useState(false);
   
-  // Convert animation trigger to ref - doesn't need to cause re-renders
+  // Animation refs
   const animationTriggerRef = useRef(0);
   const lastCorrectBasketIdRef = useRef<string | null>(null);
   const resetPositionTriggerRef = useRef(0);
   
-  // Optimized basket swap using ref instead of state
+  // Pending items buffer
+  const [pendingItems, setPendingItems] = useState<ClothingItem[]>([]);
+  
+  // Basket swap optimization using ref
   const basketSwapRef = useRef({
     basket1Id: null as string | null,
     basket2Id: null as string | null,
@@ -128,15 +178,297 @@ const LaundryService = () => {
   
   // References for basket positions
   const basketRefs = useRef<Record<string, { x: number, y: number }>>({});
+
+  // Sync refs when state changes
+  useEffect(() => {
+    levelConfigRef.current = state.currentLevelConfig;
+    timerRef.current = state.timer;
+  }, [state.currentLevelConfig, state.timer]);
+
+  // Load saved level from AsyncStorage on initial mount
+  useEffect(() => {
+    const loadSavedLevel = async () => {
+      try {
+        const savedLevel = await AsyncStorage.getItem(STORAGE_KEY_LEVEL);
+        const parsedLevel = savedLevel ? parseInt(savedLevel) : initialLevel;
+        
+        if (parsedLevel > initialLevel) {
+          setMaxUnlockedLevel(parsedLevel);
+          console.log(`Loaded saved player level: ${parsedLevel}`);
+        }
+      } catch (error) {
+        console.error('Error loading saved level:', error);
+      }
+    };
+    
+    loadSavedLevel();
+  }, []);
+
+  // Generate a random item
+  const generateRandomItem = useCallback((isPending = false): ClothingItem => {
+    const availableColors = levelConfigRef.current.availableColors;
+    const randomIcon = iconTypes[Math.floor(Math.random() * iconTypes.length)];
+    const randomColor = availableColors[Math.floor(Math.random() * availableColors.length)];
+    
+    return {
+      id: generateUniqueId(),
+      icon: randomIcon,
+      color: randomColor,
+      isPending,
+    };
+  }, []);
+
+  // Fill the pending items buffer
+  const generatePendingItemsBuffer = useCallback(() => {
+    const buffer = Array(10).fill(null).map(() => generateRandomItem(true));
+    setPendingItems(buffer);
+  }, [generateRandomItem]);
+
+  // Check if color is accepted in basket group
+  const isColorAcceptedInGroup = useCallback((color: ClothingColor, basketId: string): boolean => {
+    // Find the basket
+    const basket = levelConfigRef.current.baskets.find(b => b.id === basketId);
+    
+    // Direct color match if no group
+    if (!basket || !basket.groupId) {
+      return basket?.color === color;
+    }
+    
+    // Check group color acceptance
+    const group = levelConfigRef.current.basketGroups.find(g => g.id === basket.groupId);
+    if (!group) return basket.color === color;
+    
+    return group.acceptedColors.includes(color);
+  }, []);
+
+  // Start game
+  const startGame = useCallback(() => {
+    const levelConfig = getDefaultLevelConfig(8);
+    levelConfigRef.current = levelConfig;
+    
+    // Generate initial items
+    const visibleCount = levelConfig.visibleItems;
+    const initialItems = Array(visibleCount + 1)
+      .fill(null)
+      .map((_, index) => generateRandomItem(index === visibleCount));
+    
+    // Create buffer of pending items
+    generatePendingItemsBuffer();
+    
+    // Initialize game state
+    setState({
+      items: initialItems,
+      score: 0,
+      timer: levelConfig.timeLimit || 45,
+      level: initialLevel,
+      isGameActive: true,
+      isPaused: false,
+      animatingItemId: null,
+      currentLevelConfig: levelConfig,
+    });
+  }, [generateRandomItem, generatePendingItemsBuffer]);
+
+  // Set a specific level
+  const setLevel = useCallback((level: number) => {
+    const levelConfig = getDefaultLevelConfig(level);
+    levelConfigRef.current = levelConfig;
+    
+    // Generate initial items
+    const visibleCount = levelConfig.visibleItems;
+    const initialItems = Array(visibleCount + 1)
+      .fill(null)
+      .map((_, index) => generateRandomItem(index === visibleCount));
+    
+    // Reset buffer
+    generatePendingItemsBuffer();
+    
+    setState({
+      items: initialItems,
+      score: 0,
+      timer: levelConfig.timeLimit || 45,
+      level,
+      isGameActive: true,
+      isPaused: false,
+      animatingItemId: null,
+      currentLevelConfig: levelConfig,
+      levelComplete: false
+    });
+  }, [generateRandomItem, generatePendingItemsBuffer]);
+
+  // Toggle pause state
+  const togglePause = useCallback(() => {
+    setState(prev => ({ ...prev, isPaused: !prev.isPaused }));
+  }, []);
+
+  // Get current timer value
+  const getCurrentTimer = useCallback(() => timerRef.current, []);
+
+  // Handle item selection logic
+  const handleItemSelection = useCallback((selectedBasketColor: ClothingColor, itemId?: string, basketId?: string) => {
+    // Skip if game is not active or animation is in progress
+    if (!state.isGameActive || state.isPaused || 
+        state.items.length === 0 || state.animatingItemId) {
+      return false;
+    }
+    
+    // Find target item
+    const targetItemId = itemId || state.items[0].id;
+    const targetItem = state.items.find(item => item.id === targetItemId);
+    if (!targetItem) return false;
+    
+    // Check if selection is correct
+    const isCorrect = basketId 
+      ? isColorAcceptedInGroup(targetItem.color, basketId)
+      : selectedBasketColor === targetItem.color;
+    
+    if (isCorrect) {
+      // Correct selection - mark item for animation
+      setState(prev => ({
+        ...prev,
+        items: prev.items.map(item => 
+          item.id === targetItemId ? { ...item, animating: true } : item
+        ),
+        animatingItemId: targetItemId,
+      }));
+    } else {
+      // Incorrect selection - apply penalty
+      const pointsPenalty = levelConfigRef.current.pointsLostPerError || -10;
+      setState(prev => ({
+        ...prev,
+        score: Math.max(0, prev.score + pointsPenalty),
+      }));
+    }
+    
+    return isCorrect;
+  }, [state, isColorAcceptedInGroup]);
+
+  // Complete animation and update game state
+  const completeAnimation = useCallback((itemId: string) => {
+    setState(prev => {
+      // Find item index
+      const itemIndex = prev.items.findIndex(item => item.id === itemId);
+      if (itemIndex === -1) return prev;
+      
+      // Create new items array without the completed item
+      const newItems = [...prev.items];
+      newItems.splice(itemIndex, 1);
+      
+      // Update next pending item if available
+      if (newItems.length > 0) {
+        const lastIndex = newItems.length - 1;
+        newItems[lastIndex] = { ...newItems[lastIndex], isPending: false };
+      }
+      
+      // Calculate points
+      const pointsEarned = prev.currentLevelConfig.pointsPerItem || 10;
+      
+      // Add new pending item from buffer
+      const updatedItems = [...newItems];
+      
+      if (pendingItems.length > 0) {
+        // Use an item from the pending buffer
+        const [nextItem, ...remainingItems] = pendingItems;
+        updatedItems.push(nextItem);
+        
+        // Update pending items buffer if running low
+        if (remainingItems.length < 5) {
+          const additionalItems = Array(10 - remainingItems.length)
+            .fill(null)
+            .map(() => generateRandomItem(true));
+          
+          setPendingItems([...remainingItems, ...additionalItems]);
+        } else {
+          setPendingItems(remainingItems);
+        }
+      } else {
+        // Generate a new item if buffer is empty
+        updatedItems.push(generateRandomItem(true));
+      }
+      
+      // Return updated state
+      return {
+        ...prev,
+        items: updatedItems,
+        score: prev.score + pointsEarned,
+        animatingItemId: null,
+      };
+    });
+  }, [pendingItems, generateRandomItem]);
+
+  // Update level configuration
+  const setCurrentLevelConfig = useCallback((newConfig: LevelConfig) => {
+    levelConfigRef.current = newConfig;
+    setState(prev => ({ ...prev, currentLevelConfig: newConfig }));
+  }, []);
   
   // Start game on component mount
   useEffect(() => {
     startGame();
   }, [startGame]);
   
-  // Combined effect for game state management - tối ưu bằng cách giảm dependency
+  // Timer countdown logic
   useEffect(() => {
-    // Reset swap state when starting a new level
+    // Only run timer when game is active and not paused
+    if (!state.isGameActive || state.isPaused || state.timer <= 0) return;
+    
+    const timerInterval = setInterval(() => {
+      const newTimer = timerRef.current - 1;
+      timerRef.current = newTimer;
+      
+      // Update state only at important milestones or periodically
+      if (
+        newTimer === 0 || // When time runs out
+        newTimer % 5 === 0 || // Update every 5 seconds
+        (state.currentLevelConfig.swapTimes && // When basket swaps are needed
+         state.currentLevelConfig.swapTimes.some(
+           swap => newTimer >= swap.min && newTimer <= swap.max
+         ))
+      ) {
+        setState(prev => ({ ...prev, timer: newTimer }));
+      }
+    }, 1000);
+    
+    return () => clearInterval(timerInterval);
+  }, [state.isGameActive, state.isPaused, state.currentLevelConfig]);
+  
+  // Check for game over condition
+  useEffect(() => {
+    if (state.timer <= 0 && state.isGameActive) {
+      // Game is over, check if player has enough points
+      const targetScore = state.currentLevelConfig.targetScore ?? 0;
+      const levelCompleted = state.score >= targetScore;
+      
+      // If level is completed, save progress and unlock next level
+      if (levelCompleted) {
+        const nextLevel = state.level + 1;
+        // Update max level if this is a new achievement
+        if (nextLevel > maxUnlockedLevel) {
+          setMaxUnlockedLevel(nextLevel);
+          
+          // Save to AsyncStorage
+          (async () => {
+            try {
+              await AsyncStorage.setItem(STORAGE_KEY_LEVEL, nextLevel.toString());
+              console.log(`Saved player level: ${nextLevel}`);
+            } catch (error) {
+              console.error('Error saving player level:', error);
+            }
+          })();
+        }
+      }
+      
+      setState(prev => ({
+        ...prev,
+        isGameActive: false,
+        levelComplete: levelCompleted
+      }));
+      
+      setGameOverVisible(true);
+    }
+  }, [state.timer, state.isGameActive, state.score, state.currentLevelConfig, state.level, maxUnlockedLevel]);
+  
+  // Reset basket state when starting a new level
+  useEffect(() => {
     if (state.timer === state.currentLevelConfig?.timeLimit) {
       basketSwapRef.current = {
         basket1Id: null,
@@ -152,18 +484,7 @@ const LaundryService = () => {
     }
   }, [state.level, state.timer, state.currentLevelConfig]);
   
-  // Tách effect cho game over để giảm re-render
-  useEffect(() => {
-    // Show game over modal when game ends
-    if (!state.isGameActive && state.timer === 0) {
-      setGameOverVisible(true);
-      
-      // Reset all basket positions when game ends (level completed or failed)
-      resetPositionTriggerRef.current += 1;
-    }
-  }, [state.isGameActive, state.timer]);
-  
-  // Monitor time to trigger basket swaps - tối ưu để sử dụng getCurrentTimer
+  // Monitor time to trigger basket swaps
   useEffect(() => {
     // Skip if conditions aren't met
     if (state.isPaused || !state.isGameActive) return;
@@ -171,11 +492,10 @@ const LaundryService = () => {
     const swapTimes = state.currentLevelConfig?.swapTimes;
     if (!swapTimes || swapTimes.length === 0 || basketSwapRef.current.completedSwaps >= swapTimes.length) return;
     
-    // Log for debugging
     console.log(`Monitoring for swap ${basketSwapRef.current.completedSwaps + 1}/${swapTimes.length}, timer=${getCurrentTimer()}`);
     
     const checkSwapInterval = setInterval(() => {
-      // Chỉ kiểm tra khi không đang thực hiện swap
+      // Only check when not currently swapping
       if (basketSwapRef.current.inProgress) return;
       
       const currentTime = getCurrentTimer();
@@ -198,23 +518,21 @@ const LaundryService = () => {
           completedSwaps: newCompletedSwaps,
           lastSwapTime: currentTime
         };
-        
-        console.log(`Updated completedSwaps=${basketSwapRef.current.completedSwaps}`);
       }
-    }, 1000); // Kiểm tra thường xuyên hơn (500ms thay vì 1000ms)
+    }, 500);
     
     return () => clearInterval(checkSwapInterval);
   }, [state.isPaused, state.isGameActive, state.currentLevelConfig, getCurrentTimer]);
-  
+
   // Function to swap two random baskets
   const triggerRandomBasketSwap = useCallback(() => {
     // Only proceed if we have enough baskets
     if (!state.currentLevelConfig?.baskets || state.currentLevelConfig.baskets.length < 2) return;
 
-    // Tạo mảng chứa các basket được nhóm theo groupId
+    // Create groups of baskets by groupId
     const basketsByGroup: Record<string, any[]> = {};
     
-    // Phân loại basket theo group
+    // Classify baskets by group
     state.currentLevelConfig.baskets.forEach(basket => {
       if (!basket.groupId) return;
       
@@ -224,38 +542,31 @@ const LaundryService = () => {
       basketsByGroup[basket.groupId].push(basket);
     });
     
-    // Lấy danh sách các group id
+    // Get list of group IDs
     const groupIds = Object.keys(basketsByGroup);
     
-    // Cần ít nhất 2 nhóm để swap giữa các nhóm khác nhau
+    // Need at least 2 groups to swap between different groups
     if (groupIds.length < 2) return;
     
-    // Chọn ngẫu nhiên 2 nhóm khác nhau
+    // Randomly select 2 different groups
     const shuffledGroups = [...groupIds].sort(() => 0.5 - Math.random());
     const group1Id = shuffledGroups[0];
     const group2Id = shuffledGroups[1];
     
-    // Chọn ngẫu nhiên một basket từ mỗi nhóm
+    // Randomly select one basket from each group
     const basket1 = basketsByGroup[group1Id][Math.floor(Math.random() * basketsByGroup[group1Id].length)];
     const basket2 = basketsByGroup[group2Id][Math.floor(Math.random() * basketsByGroup[group2Id].length)];
     
     if (!basket1 || !basket2) return;
     
-    // Update config only if baskets are from different groups - which they are now guaranteed to be
+    // Update config only if baskets are from different groups
     const updatedConfig = JSON.parse(JSON.stringify(state.currentLevelConfig));
     
     const updatedBasket1 = updatedConfig.baskets.find((b: any) => b.id === basket1.id);
     const updatedBasket2 = updatedConfig.baskets.find((b: any) => b.id === basket2.id);
     
     if (updatedBasket1 && updatedBasket2) {
-      // THAY ĐỔI: Chỉ swap groupId, giữ nguyên màu sắc bên ngoài của basket
-      // Lưu ID ban đầu để cập nhật đúng visual
-      const originalBasket1Id = updatedBasket1.id;
-      const originalBasket2Id = updatedBasket2.id;
-      const originalBasket1Position = updatedBasket1.position;
-      const originalBasket2Position = updatedBasket2.position;
-      
-      // Swap group IDs
+      // Only swap groupId, keep the original basket color
       const tempGroupId = updatedBasket1.groupId;
       updatedBasket1.groupId = updatedBasket2.groupId;
       updatedBasket2.groupId = tempGroupId;
@@ -332,7 +643,7 @@ const LaundryService = () => {
     }
   }, [handleItemSelection, shakeX, state.items, state.animatingItemId]);
   
-  // Get target score - lấy từ level hiện tại
+  // Get target score
   const getTargetScore = useCallback(() => (
     state.currentLevelConfig?.targetScore || 100
   ), [state.currentLevelConfig]);
@@ -340,7 +651,7 @@ const LaundryService = () => {
   // Restart game handler
   const handleRestart = useCallback(() => {
     setGameOverVisible(false);
-    // Instead of startGame(), use setLevel with the current level to restart at the same level
+    // Use setLevel with the current level to restart at the same level
     setLevel(state.level);
     
     // Reset basket positions when restarting current level
@@ -358,9 +669,9 @@ const LaundryService = () => {
       // Reset basket positions when moving to next level
       resetPositionTriggerRef.current += 1;
     }
-  }, [state.level, maxUnlockedLevel, setLevel, setGameOverVisible]);
+  }, [state.level, maxUnlockedLevel, setLevel]);
   
-  // Get target basket position for animation with improved readability
+  // Get target basket position for animation
   const getTargetBasketPosition = useCallback((itemColor: ClothingColor) => {
     // Case 1: Use last selected basket if available
     if (lastCorrectBasketIdRef.current && basketRefs.current[lastCorrectBasketIdRef.current]) {

@@ -1,0 +1,392 @@
+[
+    {
+        "id": 1,
+        "levels": [
+            {
+                "NUMBER_LENGTH": 3,
+                "HIDE_NUMBER_TIMEOUT": 1600,
+                "POINTS_PER_DIGIT": 50
+            },
+            {
+                "NUMBER_LENGTH": 4,
+                "HIDE_NUMBER_TIMEOUT": 1800,
+                "POINTS_PER_DIGIT": 55
+            },
+            {
+                "NUMBER_LENGTH": 4,
+                "HIDE_NUMBER_TIMEOUT": 1800,
+                "POINTS_PER_DIGIT": 60
+            },
+            {
+                "NUMBER_LENGTH": 5,
+                "HIDE_NUMBER_TIMEOUT": 2000,
+                "POINTS_PER_DIGIT": 65
+            },
+            {
+                "NUMBER_LENGTH": 5,
+                "HIDE_NUMBER_TIMEOUT": 2000,
+                "POINTS_PER_DIGIT": 70
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "levels": [
+            {
+                "NUMBER_LENGTH": 4,
+                "HIDE_NUMBER_TIMEOUT": 1800,
+                "POINTS_PER_DIGIT": 55
+            },
+            {
+                "NUMBER_LENGTH": 4,
+                "HIDE_NUMBER_TIMEOUT": 1800,
+                "POINTS_PER_DIGIT": 60
+            },
+            {
+                "NUMBER_LENGTH": 5,
+                "HIDE_NUMBER_TIMEOUT": 2000,
+                "POINTS_PER_DIGIT": 65
+            },
+            {
+                "NUMBER_LENGTH": 5,
+                "HIDE_NUMBER_TIMEOUT": 2000,
+                "POINTS_PER_DIGIT": 70
+            },
+            {
+                "NUMBER_LENGTH": 6,
+                "HIDE_NUMBER_TIMEOUT": 2200,
+                "POINTS_PER_DIGIT": 70
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "levels": [
+            {
+                "NUMBER_LENGTH": 4,
+                "HIDE_NUMBER_TIMEOUT": 1800,
+                "POINTS_PER_DIGIT": 60
+            },
+            {
+                "NUMBER_LENGTH": 5,
+                "HIDE_NUMBER_TIMEOUT": 2000,
+                "POINTS_PER_DIGIT": 65
+            },
+            {
+                "NUMBER_LENGTH": 5,
+                "HIDE_NUMBER_TIMEOUT": 2000,
+                "POINTS_PER_DIGIT": 70
+            },
+            {
+                "NUMBER_LENGTH": 6,
+                "HIDE_NUMBER_TIMEOUT": 2200,
+                "POINTS_PER_DIGIT": 70
+            },
+            {
+                "NUMBER_LENGTH": 6,
+                "HIDE_NUMBER_TIMEOUT": 2200,
+                "POINTS_PER_DIGIT": 70
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "levels": [
+            {
+                "NUMBER_LENGTH": 5,
+                "HIDE_NUMBER_TIMEOUT": 2000,
+                "POINTS_PER_DIGIT": 65
+            },
+            {
+                "NUMBER_LENGTH": 5,
+                "HIDE_NUMBER_TIMEOUT": 2000,
+                "POINTS_PER_DIGIT": 70
+            },
+            {
+                "NUMBER_LENGTH": 6,
+                "HIDE_NUMBER_TIMEOUT": 2200,
+                "POINTS_PER_DIGIT": 70
+            },
+            {
+                "NUMBER_LENGTH": 6,
+                "HIDE_NUMBER_TIMEOUT": 2200,
+                "POINTS_PER_DIGIT": 70
+            },
+            {
+                "NUMBER_LENGTH": 7,
+                "HIDE_NUMBER_TIMEOUT": 2400,
+                "POINTS_PER_DIGIT": 70
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "levels": [
+            {
+                "NUMBER_LENGTH": 5,
+                "HIDE_NUMBER_TIMEOUT": 2000,
+                "POINTS_PER_DIGIT": 70
+            },
+            {
+                "NUMBER_LENGTH": 6,
+                "HIDE_NUMBER_TIMEOUT": 2200,
+                "POINTS_PER_DIGIT": 70
+            },
+            {
+                "NUMBER_LENGTH": 6,
+                "HIDE_NUMBER_TIMEOUT": 2200,
+                "POINTS_PER_DIGIT": 70
+            },
+            {
+                "NUMBER_LENGTH": 7,
+                "HIDE_NUMBER_TIMEOUT": 2400,
+                "POINTS_PER_DIGIT": 70
+            },
+            {
+                "NUMBER_LENGTH": 8,
+                "HIDE_NUMBER_TIMEOUT": 2600,
+                "POINTS_PER_DIGIT": 75
+            }
+        ]
+    },
+    {
+        "id": 6,
+        "levels": [
+            {
+                "NUMBER_LENGTH": 6,
+                "HIDE_NUMBER_TIMEOUT": 2200,
+                "POINTS_PER_DIGIT": 70
+            },
+            {
+                "NUMBER_LENGTH": 6,
+                "HIDE_NUMBER_TIMEOUT": 2200,
+                "POINTS_PER_DIGIT": 70
+            },
+            {
+                "NUMBER_LENGTH": 7,
+                "HIDE_NUMBER_TIMEOUT": 2400,
+                "POINTS_PER_DIGIT": 70
+            },
+            {
+                "NUMBER_LENGTH": 8,
+                "HIDE_NUMBER_TIMEOUT": 2600,
+                "POINTS_PER_DIGIT": 75
+            },
+            {
+                "NUMBER_LENGTH": 9,
+                "HIDE_NUMBER_TIMEOUT": 2800,
+                "POINTS_PER_DIGIT": 80
+            }
+        ]
+    },
+    {
+        "id": 7,
+        "levels": [
+            {
+                "NUMBER_LENGTH": 6,
+                "HIDE_NUMBER_TIMEOUT": 2200,
+                "POINTS_PER_DIGIT": 70
+            },
+            {
+                "NUMBER_LENGTH": 7,
+                "HIDE_NUMBER_TIMEOUT": 2400,
+                "POINTS_PER_DIGIT": 70
+            },
+            {
+                "NUMBER_LENGTH": 8,
+                "HIDE_NUMBER_TIMEOUT": 2600,
+                "POINTS_PER_DIGIT": 75
+            },
+            {
+                "NUMBER_LENGTH": 9,
+                "HIDE_NUMBER_TIMEOUT": 2800,
+                "POINTS_PER_DIGIT": 80
+            },
+            {
+                "NUMBER_LENGTH": 10,
+                "HIDE_NUMBER_TIMEOUT": 3000,
+                "POINTS_PER_DIGIT": 85
+            }
+        ]
+    },
+    {
+        "id": 8,
+        "levels": [
+            {
+                "NUMBER_LENGTH": 7,
+                "HIDE_NUMBER_TIMEOUT": 2400,
+                "POINTS_PER_DIGIT": 70
+            },
+            {
+                "NUMBER_LENGTH": 8,
+                "HIDE_NUMBER_TIMEOUT": 2600,
+                "POINTS_PER_DIGIT": 75
+            },
+            {
+                "NUMBER_LENGTH": 9,
+                "HIDE_NUMBER_TIMEOUT": 2800,
+                "POINTS_PER_DIGIT": 80
+            },
+            {
+                "NUMBER_LENGTH": 10,
+                "HIDE_NUMBER_TIMEOUT": 3000,
+                "POINTS_PER_DIGIT": 85
+            },
+            {
+                "NUMBER_LENGTH": 11,
+                "HIDE_NUMBER_TIMEOUT": 3200,
+                "POINTS_PER_DIGIT": 90
+            }
+        ]
+    },
+    {
+        "id": 9,
+        "levels": [
+            {
+                "NUMBER_LENGTH": 8,
+                "HIDE_NUMBER_TIMEOUT": 2600,
+                "POINTS_PER_DIGIT": 75
+            },
+            {
+                "NUMBER_LENGTH": 9,
+                "HIDE_NUMBER_TIMEOUT": 2800,
+                "POINTS_PER_DIGIT": 80
+            },
+            {
+                "NUMBER_LENGTH": 10,
+                "HIDE_NUMBER_TIMEOUT": 3000,
+                "POINTS_PER_DIGIT": 85
+            },
+            {
+                "NUMBER_LENGTH": 11,
+                "HIDE_NUMBER_TIMEOUT": 3200,
+                "POINTS_PER_DIGIT": 90
+            },
+            {
+                "NUMBER_LENGTH": 12,
+                "HIDE_NUMBER_TIMEOUT": 3400,
+                "POINTS_PER_DIGIT": 95
+            }
+        ]
+    },
+    {
+        "id": 10,
+        "levels": [
+            {
+                "NUMBER_LENGTH": 9,
+                "HIDE_NUMBER_TIMEOUT": 2800,
+                "POINTS_PER_DIGIT": 80
+            },
+            {
+                "NUMBER_LENGTH": 10,
+                "HIDE_NUMBER_TIMEOUT": 3000,
+                "POINTS_PER_DIGIT": 85
+            },
+            {
+                "NUMBER_LENGTH": 11,
+                "HIDE_NUMBER_TIMEOUT": 3200,
+                "POINTS_PER_DIGIT": 90
+            },
+            {
+                "NUMBER_LENGTH": 12,
+                "HIDE_NUMBER_TIMEOUT": 3400,
+                "POINTS_PER_DIGIT": 95
+            },
+            {
+                "NUMBER_LENGTH": 12,
+                "HIDE_NUMBER_TIMEOUT": 3400,
+                "POINTS_PER_DIGIT": 95
+            }
+        ]
+    },
+    {
+        "id": 11,
+        "levels": [
+            {
+                "NUMBER_LENGTH": 10,
+                "HIDE_NUMBER_TIMEOUT": 3000,
+                "POINTS_PER_DIGIT": 85
+            },
+            {
+                "NUMBER_LENGTH": 11,
+                "HIDE_NUMBER_TIMEOUT": 3200,
+                "POINTS_PER_DIGIT": 90
+            },
+            {
+                "NUMBER_LENGTH": 12,
+                "HIDE_NUMBER_TIMEOUT": 3400,
+                "POINTS_PER_DIGIT": 95
+            },
+            {
+                "NUMBER_LENGTH": 12,
+                "HIDE_NUMBER_TIMEOUT": 3400,
+                "POINTS_PER_DIGIT": 95
+            },
+            {
+                "NUMBER_LENGTH": 12,
+                "HIDE_NUMBER_TIMEOUT": 3400,
+                "POINTS_PER_DIGIT": 95
+            }
+        ]
+    },
+    {
+        "id": 12,
+        "levels": [
+            {
+                "NUMBER_LENGTH": 11,
+                "HIDE_NUMBER_TIMEOUT": 3200,
+                "POINTS_PER_DIGIT": 90
+            },
+            {
+                "NUMBER_LENGTH": 12,
+                "HIDE_NUMBER_TIMEOUT": 3400,
+                "POINTS_PER_DIGIT": 95
+            },
+            {
+                "NUMBER_LENGTH": 12,
+                "HIDE_NUMBER_TIMEOUT": 3400,
+                "POINTS_PER_DIGIT": 95
+            },
+            {
+                "NUMBER_LENGTH": 12,
+                "HIDE_NUMBER_TIMEOUT": 3400,
+                "POINTS_PER_DIGIT": 95
+            },
+            {
+                "NUMBER_LENGTH": 12,
+                "HIDE_NUMBER_TIMEOUT": 3400,
+                "POINTS_PER_DIGIT": 95
+            }
+        ]
+    },
+    {
+        "id": 13,
+        "levels": [
+            {
+                "NUMBER_LENGTH": 12,
+                "HIDE_NUMBER_TIMEOUT": 3400,
+                "POINTS_PER_DIGIT": 95
+            },
+            {
+                "NUMBER_LENGTH": 12,
+                "HIDE_NUMBER_TIMEOUT": 3400,
+                "POINTS_PER_DIGIT": 95
+            },
+            {
+                "NUMBER_LENGTH": 12,
+                "HIDE_NUMBER_TIMEOUT": 3400,
+                "POINTS_PER_DIGIT": 95
+            },
+            {
+                "NUMBER_LENGTH": 12,
+                "HIDE_NUMBER_TIMEOUT": 3400,
+                "POINTS_PER_DIGIT": 95
+            },
+            {
+                "NUMBER_LENGTH": 12,
+                "HIDE_NUMBER_TIMEOUT": 3400,
+                "POINTS_PER_DIGIT": 95
+            }
+        ]
+    }
+]

@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { View, Text } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import levels from './levels.json';
+import levels from './data/levels.json';
 import { Disc, FlyingDiscInfo } from './types';
 import { towerWidth, towerHeight, discHeight, calculateDiscWidth, getDiscPosition } from './utilities';
 import Tower from './components/Tower';
