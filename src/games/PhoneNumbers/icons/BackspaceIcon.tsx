@@ -1,6 +1,15 @@
+/**
+ * BackspaceIcon - Icon nút xóa
+ * Sử dụng trong trò chơi PhoneNumbers để hiển thị biểu tượng xóa trên bàn phím
+ * cho phép người chơi xóa số đã nhập
+ */
 import * as React from "react"
 import Svg, { Path, SvgProps } from "react-native-svg"
 
+/**
+ * Component SVG biểu tượng nút xóa
+ * @param props Props của SVG từ react-native-svg
+ */
 function BackspaceIcon(props: SvgProps) {
     return (
         <Svg

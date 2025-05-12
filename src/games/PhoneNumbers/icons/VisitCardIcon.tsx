@@ -1,6 +1,15 @@
+/**
+ * VisitCardIcon - Icon thẻ liên hệ
+ * Sử dụng trong trò chơi PhoneNumbers để hiển thị hình nền thẻ liên hệ
+ * chứa tên và số điện thoại cần ghi nhớ
+ */
 import * as React from "react"
 import Svg, { Path, SvgProps } from "react-native-svg"
 
+/**
+ * Component SVG thẻ liên hệ
+ * @param props Props của SVG từ react-native-svg
+ */
 function VisitCardIcon(props: SvgProps) {
     return (
         <Svg

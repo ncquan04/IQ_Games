@@ -36,7 +36,7 @@ const ModalBase = ({children, ref, onRequestClose}: ModalBaseProps) => {
             visible={visible}
             onRequestClose={onRequestClose ? onRequestClose : () => hide()}
         >
-                <View style={{width: '100%', height: '100%', justifyContent: 'center', alignItems: 'center', backgroundColor: '#1c535e', paddingTop: StatusBar.currentHeight}}>
+                <View style={{width: Dimensions.get('screen').width, height: Dimensions.get('screen').height, justifyContent: 'center', alignItems: 'center', backgroundColor: '#1c535e', paddingTop: StatusBar.currentHeight}}>
                     {children}
                 </View>
         </Modal>

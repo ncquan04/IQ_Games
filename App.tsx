@@ -29,6 +29,7 @@ import TowerOfHanoi from './src/games/TowerOfHanoi/TowerOfHanoi';
 import ArrowDirections from './src/games/ArrowDirections/ArrowDirections';
 import LaundryService from './src/games/LaundryService/LaundryService';
 import PhoneNumbers from './src/games/PhoneNumbers/PhoneNumbers';
+import HiddenGems from './src/games/HiddenGems/HiddenGems';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -79,7 +80,7 @@ function App(): React.JSX.Element {
   const safePadding = '5%';
 
   return (
-    <PhoneNumbers />
+    <HiddenGems />
   );
 }
 

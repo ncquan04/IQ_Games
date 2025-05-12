@@ -1,0 +1,589 @@
+[
+    {
+        "id": 0,
+        "levels": [
+            {
+                "GRID_WIDTH": 3,
+                "GRID_HEIGHT": 3,
+                "GEMS_COUNT": 3,
+                "POINTS_PER_CORRECT": 40,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 3,
+                "GRID_HEIGHT": 4,
+                "GEMS_COUNT": 3,
+                "POINTS_PER_CORRECT": 40,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 3,
+                "GRID_HEIGHT": 4,
+                "GEMS_COUNT": 4,
+                "POINTS_PER_CORRECT": 40,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 4,
+                "GEMS_COUNT": 4,
+                "POINTS_PER_CORRECT": 40,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 4,
+                "GEMS_COUNT": 5,
+                "POINTS_PER_CORRECT": 40,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 4,
+                "GEMS_COUNT": 5,
+                "POINTS_PER_CORRECT": 45,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 5,
+                "GEMS_COUNT": 5,
+                "POINTS_PER_CORRECT": 45,
+                "HIDE_GEMS_TIMEOUT": 2000
+            }
+        ]
+    },
+    {
+        "id": 1,
+        "levels": [
+            {
+                "GRID_WIDTH": 3,
+                "GRID_HEIGHT": 4,
+                "GEMS_COUNT": 3,
+                "POINTS_PER_CORRECT": 40,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 4,
+                "GEMS_COUNT": 3,
+                "POINTS_PER_CORRECT": 40,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 4,
+                "GEMS_COUNT": 5,
+                "POINTS_PER_CORRECT": 40,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 4,
+                "GEMS_COUNT": 5,
+                "POINTS_PER_CORRECT": 45,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 5,
+                "GEMS_COUNT": 5,
+                "POINTS_PER_CORRECT": 45,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 5,
+                "GEMS_COUNT": 6,
+                "POINTS_PER_CORRECT": 45,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 5,
+                "GEMS_COUNT": 6,
+                "POINTS_PER_CORRECT": 45,
+                "HIDE_GEMS_TIMEOUT": 2000
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "levels": [
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 4,
+                "GEMS_COUNT": 5,
+                "POINTS_PER_CORRECT": 40,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 4,
+                "GEMS_COUNT": 5,
+                "POINTS_PER_CORRECT": 45,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 5,
+                "GEMS_COUNT": 5,
+                "POINTS_PER_CORRECT": 45,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 5,
+                "GEMS_COUNT": 6,
+                "POINTS_PER_CORRECT": 45,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 5,
+                "GEMS_COUNT": 6,
+                "POINTS_PER_CORRECT": 45,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 6,
+                "GEMS_COUNT": 6,
+                "POINTS_PER_CORRECT": 45,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 6,
+                "GEMS_COUNT": 7,
+                "POINTS_PER_CORRECT": 50,
+                "HIDE_GEMS_TIMEOUT": 2000
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "levels": [
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 5,
+                "GEMS_COUNT": 5,
+                "POINTS_PER_CORRECT": 45,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 5,
+                "GEMS_COUNT": 6,
+                "POINTS_PER_CORRECT": 45,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 5,
+                "GEMS_COUNT": 6,
+                "POINTS_PER_CORRECT": 45,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 6,
+                "GEMS_COUNT": 6,
+                "POINTS_PER_CORRECT": 45,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 6,
+                "GEMS_COUNT": 7,
+                "POINTS_PER_CORRECT": 50,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 6,
+                "GEMS_COUNT": 7,
+                "POINTS_PER_CORRECT": 50,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 6,
+                "GEMS_COUNT": 7,
+                "POINTS_PER_CORRECT": 50,
+                "HIDE_GEMS_TIMEOUT": 2000
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "levels": [
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 5,
+                "GEMS_COUNT": 6,
+                "POINTS_PER_CORRECT": 50,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 6,
+                "GEMS_COUNT": 6,
+                "POINTS_PER_CORRECT": 45,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 6,
+                "GEMS_COUNT": 7,
+                "POINTS_PER_CORRECT": 50,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 6,
+                "GEMS_COUNT": 7,
+                "POINTS_PER_CORRECT": 50,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 6,
+                "GEMS_COUNT": 7,
+                "POINTS_PER_CORRECT": 50,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 6,
+                "GEMS_COUNT": 8,
+                "POINTS_PER_CORRECT": 50,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 6,
+                "GEMS_COUNT": 8,
+                "POINTS_PER_CORRECT": 50,
+                "HIDE_GEMS_TIMEOUT": 2000
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "levels": [
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 6,
+                "GEMS_COUNT": 7,
+                "POINTS_PER_CORRECT": 50,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 6,
+                "GEMS_COUNT": 7,
+                "POINTS_PER_CORRECT": 50,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 6,
+                "GEMS_COUNT": 7,
+                "POINTS_PER_CORRECT": 50,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 6,
+                "GEMS_COUNT": 8,
+                "POINTS_PER_CORRECT": 50,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 6,
+                "GEMS_COUNT": 8,
+                "POINTS_PER_CORRECT": 50,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 6,
+                "GEMS_COUNT": 9,
+                "POINTS_PER_CORRECT": 52,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 7,
+                "GEMS_COUNT": 8,
+                "POINTS_PER_CORRECT": 53,
+                "HIDE_GEMS_TIMEOUT": 2000
+            }
+        ]
+    },
+    {
+        "id": 6,
+        "levels": [
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 6,
+                "GEMS_COUNT": 7,
+                "POINTS_PER_CORRECT": 50,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 6,
+                "GEMS_COUNT": 8,
+                "POINTS_PER_CORRECT": 50,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 6,
+                "GEMS_COUNT": 8,
+                "POINTS_PER_CORRECT": 50,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 6,
+                "GEMS_COUNT": 9,
+                "POINTS_PER_CORRECT": 52,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 7,
+                "GEMS_COUNT": 9,
+                "POINTS_PER_CORRECT": 53,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 7,
+                "GEMS_COUNT": 10,
+                "POINTS_PER_CORRECT": 54,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 7,
+                "GEMS_COUNT": 10,
+                "POINTS_PER_CORRECT": 54,
+                "HIDE_GEMS_TIMEOUT": 2000
+            }
+        ]
+    },
+    {
+        "id": 7,
+        "levels": [
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 6,
+                "GEMS_COUNT": 8,
+                "POINTS_PER_CORRECT": 50,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 6,
+                "GEMS_COUNT": 9,
+                "POINTS_PER_CORRECT": 52,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 7,
+                "GEMS_COUNT": 9,
+                "POINTS_PER_CORRECT": 53,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 7,
+                "GEMS_COUNT": 10,
+                "POINTS_PER_CORRECT": 54,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 7,
+                "GEMS_COUNT": 10,
+                "POINTS_PER_CORRECT": 54,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 7,
+                "GEMS_COUNT": 11,
+                "POINTS_PER_CORRECT": 55,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 8,
+                "GEMS_COUNT": 10,
+                "POINTS_PER_CORRECT": 56,
+                "HIDE_GEMS_TIMEOUT": 2000
+            }
+        ]
+    },
+    {
+        "id": 8,
+        "levels": [
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 7,
+                "GEMS_COUNT": 9,
+                "POINTS_PER_CORRECT": 53,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 7,
+                "GEMS_COUNT": 10,
+                "POINTS_PER_CORRECT": 54,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 7,
+                "GEMS_COUNT": 10,
+                "POINTS_PER_CORRECT": 54,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 7,
+                "GEMS_COUNT": 11,
+                "POINTS_PER_CORRECT": 55,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 8,
+                "GEMS_COUNT": 10,
+                "POINTS_PER_CORRECT": 56,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 8,
+                "GEMS_COUNT": 11,
+                "POINTS_PER_CORRECT": 57,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 8,
+                "GEMS_COUNT": 11,
+                "POINTS_PER_CORRECT": 57,
+                "HIDE_GEMS_TIMEOUT": 2000
+            }
+        ]
+    },
+    {
+        "id": 9,
+        "levels": [
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 7,
+                "GEMS_COUNT": 10,
+                "POINTS_PER_CORRECT": 54,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 7,
+                "GEMS_COUNT": 11,
+                "POINTS_PER_CORRECT": 55,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 8,
+                "GEMS_COUNT": 10,
+                "POINTS_PER_CORRECT": 56,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 8,
+                "GEMS_COUNT": 11,
+                "POINTS_PER_CORRECT": 57,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 8,
+                "GEMS_COUNT": 11,
+                "POINTS_PER_CORRECT": 57,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 8,
+                "GEMS_COUNT": 12,
+                "POINTS_PER_CORRECT": 58,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 8,
+                "GEMS_COUNT": 12,
+                "POINTS_PER_CORRECT": 58,
+                "HIDE_GEMS_TIMEOUT": 2000
+            }
+        ]
+    },
+    {
+        "id": 10,
+        "levels": [
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 8,
+                "GEMS_COUNT": 11,
+                "POINTS_PER_CORRECT": 57,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 8,
+                "GEMS_COUNT": 12,
+                "POINTS_PER_CORRECT": 58,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 8,
+                "GEMS_COUNT": 12,
+                "POINTS_PER_CORRECT": 58,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 9,
+                "GEMS_COUNT": 12,
+                "POINTS_PER_CORRECT": 58,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 9,
+                "GEMS_COUNT": 13,
+                "POINTS_PER_CORRECT": 59,
+                "HIDE_GEMS_TIMEOUT": 2000
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 9,
+                "GEMS_COUNT": 13,
+                "POINTS_PER_CORRECT": 59,
+                "HIDE_GEMS_TIMEOUT": 2000
+            }
+        ]
+    }
+]
