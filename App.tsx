@@ -19,7 +19,8 @@ import StrangeSignals from './src/games/StrangeSignals/StrangeSignals';
 function App(): React.JSX.Element {
 
   return (
-    <StrangeSignals />
+    //test branch
+    <ConnectTheDots />
   );
 }
 
