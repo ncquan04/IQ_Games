@@ -128,6 +128,7 @@ const HiddenGems = () => {
     }    
 
     console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+    console.log('testttttttttttttttttttttttttttttttttttttttt');
     
     /**
      * Xử lý khi người chơi đã chọn xong tất cả các ô trong màn hiện tại
