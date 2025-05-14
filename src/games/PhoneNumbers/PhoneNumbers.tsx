@@ -10,7 +10,7 @@
  */
 import { View, Text, Dimensions, StatusBar, TouchableOpacity } from 'react-native'
 import React, { useEffect, useRef, useState } from 'react'
-import Header from './components/Header'
+import Header from '../../components/Header'
 import Numpad from './components/Numpad'
 import VisitCardIcon from './icons/VisitCardIcon'
 import Animated, { Easing, FlipInEasyX, FlipOutEasyX, StretchInX, StretchOutX } from 'react-native-reanimated'
@@ -290,7 +290,8 @@ const PhoneNumbers = () => {
                                             )}
                                         </View>
                                     ))}
-                                </Animated.View>}                        </Animated.View>
+                                </Animated.View>}                        
+                        </Animated.View>
                         :
                         // Hiển thị khoảng trống khi đang chuyển cấp độ
                         <View style={{ marginTop: 10, width: '100%', aspectRatio: 379.03 / 271.81 }}></View>}

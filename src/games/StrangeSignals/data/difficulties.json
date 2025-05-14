@@ -1,0 +1,387 @@
+[
+    {
+        "id": 0,
+        "levels": [
+            {
+                "GRID_WIDTH": 2,
+                "GRID_HEIGHT": 3,
+                "BULBS_COUNT": 2,
+                "POINTS_PER_CORRECT": 65
+            },
+            {
+                "GRID_WIDTH": 2,
+                "GRID_HEIGHT": 3,
+                "BULBS_COUNT": 3,
+                "POINTS_PER_CORRECT": 70
+            },
+            {
+                "GRID_WIDTH": 3,
+                "GRID_HEIGHT": 3,
+                "BULBS_COUNT": 3,
+                "POINTS_PER_CORRECT": 75
+            },
+            {
+                "GRID_WIDTH": 3,
+                "GRID_HEIGHT": 3,
+                "BULBS_COUNT": 4,
+                "POINTS_PER_CORRECT": 80
+            },
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 4,
+                "BULBS_COUNT": 4,
+                "POINTS_PER_CORRECT": 85
+            }
+        ]
+    },
+    {
+        "id": 1,
+        "levels": [
+            {
+                "GRID_WIDTH": 2,
+                "GRID_HEIGHT": 3,
+                "BULBS_COUNT": 3,
+                "POINTS_PER_CORRECT": 70
+            },
+            {
+                "GRID_WIDTH": 3,
+                "GRID_HEIGHT": 3,
+                "BULBS_COUNT": 3,
+                "POINTS_PER_CORRECT": 75
+            },
+            {
+                "GRID_WIDTH": 3,
+                "GRID_HEIGHT": 3,
+                "BULBS_COUNT": 4,
+                "POINTS_PER_CORRECT": 80
+            },
+            {
+                "GRID_WIDTH": 3,
+                "GRID_HEIGHT": 4,
+                "BULBS_COUNT": 4,
+                "POINTS_PER_CORRECT": 85
+            },
+            {
+                "GRID_WIDTH": 3,
+                "GRID_HEIGHT": 4,
+                "BULBS_COUNT": 5,
+                "POINTS_PER_CORRECT": 90
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "levels": [
+            {
+                "GRID_WIDTH": 3,
+                "GRID_HEIGHT": 3,
+                "BULBS_COUNT": 3,
+                "POINTS_PER_CORRECT": 75
+            },
+            {
+                "GRID_WIDTH": 3,
+                "GRID_HEIGHT": 3,
+                "BULBS_COUNT": 4,
+                "POINTS_PER_CORRECT": 80
+            },
+            {
+                "GRID_WIDTH": 3,
+                "GRID_HEIGHT": 4,
+                "BULBS_COUNT": 4,
+                "POINTS_PER_CORRECT": 85
+            },
+            {
+                "GRID_WIDTH": 3,
+                "GRID_HEIGHT": 4,
+                "BULBS_COUNT": 5,
+                "POINTS_PER_CORRECT": 90
+            },
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 4,
+                "BULBS_COUNT": 5,
+                "POINTS_PER_CORRECT": 95
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "levels": [
+            {
+                "GRID_WIDTH": 3,
+                "GRID_HEIGHT": 3,
+                "BULBS_COUNT": 4,
+                "POINTS_PER_CORRECT": 80
+            },
+            {
+                "GRID_WIDTH": 3,
+                "GRID_HEIGHT": 4,
+                "BULBS_COUNT": 4,
+                "POINTS_PER_CORRECT": 85
+            },
+            {
+                "GRID_WIDTH": 3,
+                "GRID_HEIGHT": 4,
+                "BULBS_COUNT": 5,
+                "POINTS_PER_CORRECT": 90
+            },
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 4,
+                "BULBS_COUNT": 5,
+                "POINTS_PER_CORRECT": 95
+            },
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 4,
+                "BULBS_COUNT": 6,
+                "POINTS_PER_CORRECT": 100
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "levels": [
+            {
+                "GRID_WIDTH": 3,
+                "GRID_HEIGHT": 4,
+                "BULBS_COUNT": 4,
+                "POINTS_PER_CORRECT": 85
+            },
+            {
+                "GRID_WIDTH": 3,
+                "GRID_HEIGHT": 4,
+                "BULBS_COUNT": 5,
+                "POINTS_PER_CORRECT": 90
+            },
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 4,
+                "BULBS_COUNT": 5,
+                "POINTS_PER_CORRECT": 95
+            },
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 4,
+                "BULBS_COUNT": 6,
+                "POINTS_PER_CORRECT": 100
+            },
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 5,
+                "BULBS_COUNT": 6,
+                "POINTS_PER_CORRECT": 105
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "levels": [
+            {
+                "GRID_WIDTH": 3,
+                "GRID_HEIGHT": 4,
+                "BULBS_COUNT": 5,
+                "POINTS_PER_CORRECT": 90
+            },
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 4,
+                "BULBS_COUNT": 5,
+                "POINTS_PER_CORRECT": 95
+            },
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 4,
+                "BULBS_COUNT": 6,
+                "POINTS_PER_CORRECT": 100
+            },
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 5,
+                "BULBS_COUNT": 6,
+                "POINTS_PER_CORRECT": 105
+            },
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 5,
+                "BULBS_COUNT": 7,
+                "POINTS_PER_CORRECT": 110
+            }
+        ]
+    },
+    {
+        "id": 6,
+        "levels": [
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 4,
+                "BULBS_COUNT": 5,
+                "POINTS_PER_CORRECT": 95
+            },
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 4,
+                "BULBS_COUNT": 6,
+                "POINTS_PER_CORRECT": 100
+            },
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 5,
+                "BULBS_COUNT": 6,
+                "POINTS_PER_CORRECT": 105
+            },
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 5,
+                "BULBS_COUNT": 7,
+                "POINTS_PER_CORRECT": 110
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 5,
+                "BULBS_COUNT": 7,
+                "POINTS_PER_CORRECT": 115
+            }
+        ]
+    },
+    {
+        "id": 7,
+        "levels": [
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 5,
+                "BULBS_COUNT": 6,
+                "POINTS_PER_CORRECT": 105
+            },
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 5,
+                "BULBS_COUNT": 7,
+                "POINTS_PER_CORRECT": 110
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 5,
+                "BULBS_COUNT": 7,
+                "POINTS_PER_CORRECT": 115
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 5,
+                "BULBS_COUNT": 8,
+                "POINTS_PER_CORRECT": 120
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 6,
+                "BULBS_COUNT": 8,
+                "POINTS_PER_CORRECT": 125
+            }
+        ]
+    },
+    {
+        "id": 8,
+        "levels": [
+            {
+                "GRID_WIDTH": 4,
+                "GRID_HEIGHT": 5,
+                "BULBS_COUNT": 7,
+                "POINTS_PER_CORRECT": 110
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 5,
+                "BULBS_COUNT": 7,
+                "POINTS_PER_CORRECT": 115
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 5,
+                "BULBS_COUNT": 8,
+                "POINTS_PER_CORRECT": 120
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 6,
+                "BULBS_COUNT": 8,
+                "POINTS_PER_CORRECT": 125
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 6,
+                "BULBS_COUNT": 9,
+                "POINTS_PER_CORRECT": 130
+            }
+        ]
+    },
+    {
+        "id": 9,
+        "levels": [
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 5,
+                "BULBS_COUNT": 7,
+                "POINTS_PER_CORRECT": 115
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 5,
+                "BULBS_COUNT": 8,
+                "POINTS_PER_CORRECT": 120
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 6,
+                "BULBS_COUNT": 8,
+                "POINTS_PER_CORRECT": 125
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 6,
+                "BULBS_COUNT": 9,
+                "POINTS_PER_CORRECT": 130
+            },
+            {
+                "GRID_WIDTH": 6,
+                "GRID_HEIGHT": 6,
+                "BULBS_COUNT": 9,
+                "POINTS_PER_CORRECT": 135
+            }
+        ]
+    },
+    {
+        "id": 10,
+        "levels": [
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 5,
+                "BULBS_COUNT": 8,
+                "POINTS_PER_CORRECT": 120
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 6,
+                "BULBS_COUNT": 8,
+                "POINTS_PER_CORRECT": 125
+            },
+            {
+                "GRID_WIDTH": 5,
+                "GRID_HEIGHT": 6,
+                "BULBS_COUNT": 9,
+                "POINTS_PER_CORRECT": 130
+            },
+            {
+                "GRID_WIDTH": 6,
+                "GRID_HEIGHT": 6,
+                "BULBS_COUNT": 9,
+                "POINTS_PER_CORRECT": 135
+            },
+            {
+                "GRID_WIDTH": 6,
+                "GRID_HEIGHT": 6,
+                "BULBS_COUNT": 10,
+                "POINTS_PER_CORRECT": 140
+            }
+        ]
+    }
+]

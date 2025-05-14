@@ -1,7 +1,7 @@
 // Trò chơi Hidden Gems: Người chơi cần ghi nhớ vị trí các viên đá quý trên lưới, sau đó tìm lại chúng khi chúng bị ẩn đi
 import { View, Text, Dimensions, StatusBar } from 'react-native'
 import React, { useEffect, useRef, useState } from 'react'
-import Header from '../PhoneNumbers/components/Header'
+import Header from '../../components/Header'
 import Grid from './components/Grid'
 
 import difficulties from './data/difficulties.json' // Dữ liệu về các cấp độ khó khác nhau
@@ -106,7 +106,8 @@ const HiddenGems = () => {
         }
 
         // Nếu đã hoàn thành hết các màn của cấp độ khó hiện tại
-        if (displayLevel.current >= difficulties[newDifficulty].levels.length) {
+        if (displayLevel.current > difficulties[newDifficulty].levels.length) {
+            pointsRef.current = 0;
             newLevel = 0; // Reset về màn đầu tiên
             displayLevel.current = 1; // Reset số màn hiển thị về 1
             
@@ -114,7 +115,7 @@ const HiddenGems = () => {
             newDifficulty = hadIncorrectRef.current ? difficulty.current : difficulty.current + 1;
             
             // Nếu vượt quá số cấp độ khó, quay lại cấp độ đầu tiên
-            if (newDifficulty >= difficulties.length) {
+            if (newDifficulty > difficulties.length) {
                 newDifficulty = 0;
             }
             
@@ -124,7 +125,9 @@ const HiddenGems = () => {
         // Cập nhật màn chơi và cấp độ khó hiện tại
         level.current = newLevel;
         difficulty.current = newDifficulty;    
-    }    /**
+    }    
+    
+    /**
      * Xử lý khi người chơi đã chọn xong tất cả các ô trong màn hiện tại
      * - Tính toán thời gian cho hiệu ứng kết thúc màn
      * - Chuyển sang màn mới và bắt đầu màn mới
@@ -175,7 +178,8 @@ const HiddenGems = () => {
                         <>
                             <View style={{ width: '90%', paddingVertical: 3, backgroundColor: 'rgba(10, 31, 36, 0.3)', borderRadius: 30, alignItems: 'center' }}>
                                 <Text style={{ color: 'white', fontSize: 16, fontWeight: 500 }}>{isShowingGemsRef.current ? 'Tap the tiles to find gems 💎' : `${gameConfigRef.current.GEMS_COUNT - selectedCount} tries left`}</Text>
-                            </View><View style={{ width: '100%', marginTop: 10, justifyContent: 'center', alignItems: 'center' }}>
+                            </View>
+                            <View style={{ width: '100%', marginTop: 10, justifyContent: 'center', alignItems: 'center' }}>
                                 <Grid
                                     key={`grid-${difficulty.current}-${level}`}
                                     difficulty={difficulty.current}
@@ -193,10 +197,10 @@ const HiddenGems = () => {
                 <View />
             </View>
             <PauseModal
-            continueGame={() => { }}
-            restartGame={() => { }}
-            instructionModalRef={instructionModalRef}
-            ref={pauseModalRef}
+                continueGame={() => { }}
+                restartGame={() => { }}
+                instructionModalRef={instructionModalRef}
+                ref={pauseModalRef}
             />
             <InstructionModal
                 ref={instructionModalRef}

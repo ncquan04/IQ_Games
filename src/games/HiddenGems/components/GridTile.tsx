@@ -97,7 +97,8 @@ const GridTile = ({isGem, widthPercent, isShowingGems, setSelectedCount, gameOve
         blueValue.value = withTiming(b, { duration });
         alphaValue.value = withTiming(a, { duration });
     };
-      // Định nghĩa các phương thức có thể gọi từ bên ngoài thông qua ref
+
+    // Định nghĩa các phương thức có thể gọi từ bên ngoài thông qua ref
     useImperativeHandle(ref, () => {
         return {
             // Phương thức đặt lại trạng thái ô về ban đầu

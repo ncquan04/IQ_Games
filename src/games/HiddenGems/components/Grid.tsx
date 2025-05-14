@@ -13,7 +13,6 @@ interface GridProps {
     selectedCount: number;  // Số lần người chơi đã chọn ô
     setSelectedCount: Dispatch<SetStateAction<number>>; // Hàm để cập nhật số lần đã chọn
     gameOver: boolean;      // Trạng thái kết thúc màn chơi
-    tilesExiting?: boolean; // Trạng thái các ô đang biến mất
     hadIncorrectInLevelRef: React.RefObject<boolean>; // Tham chiếu đến trạng thái có chọn sai trong màn
     pointsRef: React.RefObject<number>; // Tham chiếu đến điểm số người chơi
 }
@@ -85,11 +84,15 @@ const Grid = ({difficulty, level, isShowingGems, selectedCount, setSelectedCount
                 placedGems++;
             }
         }
-    };    // Tạo lưới mới khi cấp độ khó hoặc màn chơi thay đổi
+    };
+    
+    // Tạo lưới mới khi cấp độ khó hoặc màn chơi thay đổi
     useEffect(() => {
         randomizeGrid(); // Khởi tạo lưới với vị trí đá quý ngẫu nhiên
         triggerRerender((prev) => prev + 1); // Kích hoạt render lại component
-    }, [difficulty, level]);    return (
+    }, [difficulty, level]);
+    
+    return (
         <View style={{width: '100%'}}>
             {/* Ánh xạ ma trận lưới thành các hàng */}
             {gridRef.current.map((row, rowIndex) => (
@@ -114,8 +117,7 @@ const Grid = ({difficulty, level, isShowingGems, selectedCount, setSelectedCount
                             setSelectedCount={setSelectedCount} // Hàm cập nhật số lượng ô đã chọn
                             gameOver={gameOver} // Trạng thái kết thúc màn chơi
                             ref={gridTileRefs.current[rowIndex][cellIndex]} // Tham chiếu đến component GridTile
-                            // Độ trễ cho hiệu ứng xuất hiện tuần tự
-                            delay={(rowIndex * gridConfigRef.current.GRID_WIDTH + cellIndex) * ANIMATION_CONFIG.TILE_DELAY_INCREMENT}
+                            delay={(rowIndex * gridConfigRef.current.GRID_WIDTH + cellIndex) * ANIMATION_CONFIG.TILE_DELAY_INCREMENT} // Độ trễ cho hiệu ứng xuất hiện tuần tự
                             hadIncorrectInLevelRef={hadIncorrectInLevelRef} // Tham chiếu đến trạng thái có chọn sai
                             pointsRef={pointsRef} // Tham chiếu đến điểm số người chơi
                             difficulty={difficulty} // Cấp độ khó hiện tại
