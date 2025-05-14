@@ -127,7 +127,7 @@ const HiddenGems = () => {
         difficulty.current = newDifficulty;    
     }    
 
-    console.log('aaaaaaaaaaaaaaaaaa')
+    console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
     
     /**
      * Xử lý khi người chơi đã chọn xong tất cả các ô trong màn hiện tại
